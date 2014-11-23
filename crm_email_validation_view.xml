@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<!--				  					-->
+		<!-- LEAD EMAIL VALIDATION ADDON 		-->
+		<!--				  					-->
+
+		<record id="crm_email_validation_form" model="ir.ui.view">
+			<field name="name">crm email validation form addon</field>
+			<field name="model">crm.lead</field>
+			<field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+	    	<field name="arch" type="xml">
+				<data>
+					<xpath expr="//field[@name='email_from']" position="after">
+						<div></div>
+						<button name="validate_email_address" string="Validate Email"
+                            	type="object" />
+
+<!--                             	attrs="{'invisible':('email_status','!=','unknown')}"/>
+-->						<field name="email_status" widget="selection" >Email Status</field>
+<!--						<field name="email_status_msg">Status Message</field>						
+-->					</xpath>
+				</data>
+			</field>
+		</record>
+	</data>
+</openerp>
