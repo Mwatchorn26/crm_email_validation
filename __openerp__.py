@@ -6,13 +6,16 @@
     """,
     "description" : """
     This module allows the salesman the ability to validate the email and returns one of 3 possible results:
+
+
+    * "Unknown" indicates there was a problem validating the email address
     
+    * "Bad Mailbox" indicates the recipient does not exist  
     
-    * Red Dot indicates there was a problem validating the email address
+    * "Server Accepts" indicates the server accepts all email sent to that domain, whether or not the mailbox exists.
     
-    * Yellow Dot indicates the server accepts all email sent to that domain, whether or not the mailbox exists.
+    * "Valid" indicates the mailbox exists, and the email address has been validated.
     
-    * Green Dot indicates the mailbox exists, and the email address has been validated.
     """,
     "author" : "Transformix Engineering Inc.", 
     "website" : "http://www.Transformix.com",
