@@ -28,7 +28,7 @@
     "data" : ["crm_email_validation_view.xml",], 
     #"data" : [],    
     'test': [],
-    #'installable': True,   
+    'installable': True,   
     #'complexity': "easy",
     #'active': False,
 }

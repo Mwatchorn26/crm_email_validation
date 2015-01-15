@@ -16,13 +16,111 @@
 						<div></div>
 						<button name="validate_email_address" string="Validate Email"
                             	type="object" />
-
-<!--                             	attrs="{'invisible':('email_status','!=','unknown')}"/>
--->						<field name="email_status" widget="selection" >Email Status</field>
-<!--						<field name="email_status_msg">Status Message</field>						
--->					</xpath>
+<!--                             	attrs="{'invisible':('email_status','!=','unknown')}"/> -->
+						 <field name="email_status" widget="selection" >Email Status</field>
+						<field name="email_status_msg">Status Message</field>
+					</xpath>
 				</data>
 			</field>
 		</record>
+		
+		<!--
+ 		<record id="crm_email_validate_more_item_action" model="ir.actions.server">
+            <field name="name">Validate Email Address</field>
+            <field name="model_id" ref="model_crm_lead"/>
+            <field name="state">code</field>
+            <field name="code">action = self.validate_email_address()</field>
+        </record>
+        
+		<record id="test_more_item" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'sale.licenses'" name="model"/>
+            <field name="name">Test Item</field>
+            <field eval="'ir.actions.server,%d'%sale_license_more_item_action" name="value"/>
+        </record>
+		-->
+		
+		<record id="action_validate_email" model="ir.actions.server">
+            <field name="name">Validate Email Address</field>
+            <field name="model_id" ref="model_crm_lead"/>
+            <field name="state">code</field>
+            <field name="code">
+                if context.get('active_model') == 'crm.lead' and context.get('active_ids'):
+                    self.validate_email_address(cr, uid, context['active_ids'], context=context)
+            </field>
+        </record>
+        
+        <record id="ir_validate_email" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'crm.lead'" name="model"/>
+            <field name="name">Validate Email Address</field>
+            <field eval="'ir.actions.server,%d'%action_validate_email" name="value"/>
+        </record>
+        	
+			
+		<!--	
+		<record id="view_custom_config_settings" model="ir.ui.view">
+        <field name="name">custom settings</field>
+        <field name="model">custom.config.settings</field>
+        <field name="arch" type="xml">
+            <form string="Configure Accounting" version="8.0" class="oe_form_configuration">
+                <header>
+                    <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                </header>
+                <field name="url"/>
+				<field name="APIKey"/>                
+            </form>
+        </field>
+    </record>
+
+    <record id="action_email_validation_config" model="ir.actions.act_window">
+        <field name="name">Validation Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sales.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+
+    <menuitem id="menu_email_validation_config" name="Validation Configuration" parent="base.menu_config"
+        sequence="16" action="action_email_validation_config"/>
+	-->
+<!-- 
+UNCOMMENT THIS SECTION
+	THIS IS THE ONE I'M USING.....	        
+-->
+        <record id="view_sale_email_validation_config_settings" model="ir.ui.view">
+            <field name="name">crm email validationsettings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="base_setup.view_sale_config_settings"/>
+            <field name="arch" type="xml">
+                <data>
+	            <div name="config_sale" position="after">
+	                <separator string="Email Address Validation"/>
+                    <group>
+                        <label for="id" string="Outsourced Service"/>
+                        <div>
+                            <div>
+                            	<!-- some text-->
+                            	
+                                <field name="email_validation_url" class="oe_inline"/>
+                             <!--   <label for="email_validation_url"/>
+                            -->
+                            	</div>
+                            <div>
+                            	some more text
+                            	<!--
+                                <field name="api_key" class="oe_inline"/>
+                                <label for="api_key"/>
+                            	-->
+                            </div>
+                        </div>
+                    </group>
+	            </div>
+	            </data>
+	    	</field>
+		</record>   	
+
 	</data>
 </openerp>

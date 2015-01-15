@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    Transformix Engineering Inc.
+#    Copyright (C) 2004-today Transformix Engineering (<http://www.transformix.com>)
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+from openerp import fields, models
+
+#class crm_e2o(models.Model):
+#    """Engineered To Order Custom CRM module""" 
+#    _name = "crm_e2o.crm_e2o"
+#
+#    name = fields.Char()
+
+#Security example:
+#access_crm_eto_eto_model,access_crm_eto_eto_model,model_crm_eto_eto_model,,1,1,1,1
+
+class email_eval_leads(models.Model):
+    """Engineered To Order Custom CRM Opportunity Additions
+    
+    This module adds custom CRM extras specific to the Engineer-To-Order manufacturing company. 
+    Project specific information is included regarding the opportunity."""
+    _inherit = "crm.lead"
+    #Add the new columns to the database table. (These are specifically for 
+    #opportunities, but  Opportunities and Leads share the same table.)
+    test_project_code = fields.Char('Test Project Code', size=20, required=False, help="Six digit code for each project like 'ABC026'")    
+    test_project_name = fields.Char('Test Project Name', size=128, required=False, help="Typically the customer's name for the product or their name for the machine.")
+    test_machine_rate = fields.Integer('Test Machine Rate', required=False, help="Number of parts per minute requested by the client.")
+    test_machine_model= fields.Many2one('crm_eto.eto_model', string="Test Machine Model",required=False, help="Select the most appropriate model")
+    test_scrap_rate = fields.Char('Test Scrap Rate', size=50, required=False, help="The acceptable scrap rate as defined by the customer at the outset of the project.")
+    test_oppor_change_reason = fields.Selection([
+                                            ('concept', 'Concept'),
+                                            ('delivery', 'Delivery'),
+                                            ('distance','Distance'),
+                                            ('lack_of_funding','Lack of Funding'),
+                                            ('no_quote','No Quote'),
+                                            ('poor_fit','Poor Fit'),
+                                            ('price','Price'),
+                                            ('re-opened','Re-Opened'),
+                                            ('relationship','Relationship'),
+                                            ('timing','Timing'),
+                                            ('unknown','Unknown'),
+                                            ('was_only_budgetary','Was only Budgetary'),
+                                            ('other','Other')
+                                            ], required=False, string="Test Reason For Change")
