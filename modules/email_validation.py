@@ -60,8 +60,9 @@ class email_validation(models.Model):
         print "."
         print ".."
         print "..."
-        print self.env['sale.config.setting'].email_validation_url
-        url = self.env['sale.config.setting'].email_validation_url
+        sale_config = self.env['sale.config.settings']
+        #print self.env['sale.config.settings'].email_validation_url
+        url = self.env['sale.config.settings'].email_validation_url
         values = {'EmailAddress' : emailAddress,
                   'APIKey' : PersonalAPIKey}
         print values
@@ -173,7 +174,7 @@ class email_validation(models.Model):
             raise Warning(_(self.email_status_msg))
         
 
-class validation_config_settings(osv.TransientModel):
+class validation_config_settings(models.TransientModel):
     
     _inherit = 'sale.config.settings'
     

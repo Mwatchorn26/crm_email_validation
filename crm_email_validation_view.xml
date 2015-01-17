@@ -102,18 +102,12 @@ UNCOMMENT THIS SECTION
                         <label for="id" string="Outsourced Service"/>
                         <div>
                             <div>
-                            	<!-- some text-->
-                            	
-                                <field name="email_validation_url" class="oe_inline"/>
-                             <!--   <label for="email_validation_url"/>
-                            -->
-                            	</div>
+                            	<label for="email_validation_url"/>
+								<field name="email_validation_url" class="oe_inline"/>
+                            </div>
                             <div>
-                            	some more text
-                            	<!--
+                            	<label for="api_key"/>
                                 <field name="api_key" class="oe_inline"/>
-                                <label for="api_key"/>
-                            	-->
                             </div>
                         </div>
                     </group>
