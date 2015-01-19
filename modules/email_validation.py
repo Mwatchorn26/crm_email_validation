@@ -49,7 +49,7 @@ class email_validation(models.Model):
     def validate_email_address(self):
         # The API key provided for your account goes here
         PersonalAPIKey = "ENTER YOUR API KEY HERE"
-        
+        PersonalAPIKey = self.env['sale.config.settings'].api_key
         # Read in the email address
         emailAddress = self.email_from #input("Enter Email:\n")
         
@@ -179,4 +179,4 @@ class validation_config_settings(models.TransientModel):
     _inherit = 'sale.config.settings'
     
     email_validation_url = fields.Char(string='email_validation', default="http://api.email-validator.net/api/verify", help="This is the URL of the site providing the email validation")
-    api_key= fields.Char(string='api_key', help="This API Key is provided by the supplier of the service once you have purchased some credits. Visit www.email-validator.net to purchase credits.")
+    api_key= fields.Char(string='api_key', default="ENTER YOUR API KEY HERE", help="This API Key is provided by the supplier of the service once you have purchased some credits. Visit www.email-validator.net to purchase credits.")
